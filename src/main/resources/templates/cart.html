@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+</head>
+<body>
+<h1>Cart</h1>
+<table border="1px">
+    <tr>
+        <td>id</td>
+        <td>image</td>
+        <td>title</td>
+        <td>price</td>
+        <td>order</td>
+    </tr>
+    <tr th:each="product : ${cart.getProductList()}">
+        <td th:text="${product.getId()}"></td>
+        <td>
+            <img th:if="${product.imgPath != null}" th:src="@{/getImage(imageName=${product.imgPath})}" alt="Product Image"width="100px">
+        </td>
+        <td th:text="${product.getTitle()}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td> <form th:action="@{/order(id=${product.id})}" method="post">
+            <button type="submit">buy</button>
+        </form></td>
+    </tr>
+</table>
+</body>
+</html>
